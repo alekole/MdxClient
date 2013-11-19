@@ -9,7 +9,7 @@ namespace MdxClient
     /// Represents a set of data commands and a database connection that are used to fill the System.Data.DataSet and update a 
     /// SQL Server Analysis Services database.
     /// </summary>
-    public class MdxDataAdapter : DbDataAdapter, IDbDataAdapter, IDataAdapter
+    public class MdxDataAdapter : DbDataAdapter, IDbDataAdapter
     {
         /// <summary>
         /// Gets or sets an MDX statement used to select records in the data source.
@@ -130,10 +130,10 @@ namespace MdxClient
         /// <summary>
         /// Initializes a new instance of the MdxDataAdapter class with the specified MdxCommand.
         /// </summary>
-        /// <param name="selectCommandText">An MdxCommand to be used by the MdxDataAdapter.SelectCommand property.</param>
+        /// <param name="selectCommand">An MdxCommand to be used by the MdxDataAdapter.SelectCommand property.</param>
         public MdxDataAdapter(MdxCommand selectCommand)
         {
-            this.SelectCommand = selectCommand;
+            SelectCommand = selectCommand;
         }
 
         /// <summary>
@@ -143,8 +143,7 @@ namespace MdxClient
         /// <param name="selectConnection">An MdxConnection representing the connection.</param>
         public MdxDataAdapter(string selectCommandText, MdxConnection selectConnection)
         {
-            MdxCommand command = new MdxCommand(selectCommandText);
-            command.Connection = selectConnection;
+            MdxCommand command = new MdxCommand(selectCommandText) {Connection = selectConnection};
             SelectCommand = command;
         }
 

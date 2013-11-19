@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.AnalysisServices.AdomdClient;
 using System.Data;
 using System.Data.Common;
@@ -13,7 +10,7 @@ namespace MdxClient
     /// </summary>
     public class MdxConnection : DbConnection
     {
-        private AdomdConnection _connection;
+        private readonly AdomdConnection _connection;
 
         /// <summary>
         /// Initializes a new instance of the MdxConnection class.
@@ -53,7 +50,7 @@ namespace MdxClient
         /// <summary>
         /// Changes the current database for an open MdxConnection.
         /// </summary>
-        /// <param name="database">The name of the database to use instead of the current database.</param>
+        /// <param name="databaseName">The name of the database to use instead of the current database.</param>
         public override void ChangeDatabase(string databaseName)
         {
             _connection.ChangeDatabase(databaseName);

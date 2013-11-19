@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 
 namespace MdxClient
@@ -10,13 +8,13 @@ namespace MdxClient
     /// Convert a base data type to another base data type
     /// 
     /// </summary>
-    public sealed class TypeConverter
+    public static class TypeConverter
     {
         private struct DbTypeMapEntry
         {
-            public Type Type;
-            public DbType DbType;
-            public SqlDbType SqlDbType;
+            public readonly Type Type;
+            public readonly DbType DbType;
+            public readonly SqlDbType SqlDbType;
             public DbTypeMapEntry(Type type, DbType dbType, SqlDbType sqlDbType)
             {
                 Type = type;
@@ -25,7 +23,7 @@ namespace MdxClient
             }
         };
 
-        private static List<DbTypeMapEntry> _DbTypeList = new List<DbTypeMapEntry>()
+        private static readonly List<DbTypeMapEntry> DbTypeList = new List<DbTypeMapEntry>
         {
             new DbTypeMapEntry(typeof(bool), DbType.Boolean, SqlDbType.Bit),
             new DbTypeMapEntry(typeof(byte), DbType.Byte, SqlDbType.TinyInt),
@@ -40,9 +38,6 @@ namespace MdxClient
             new DbTypeMapEntry(typeof(object), DbType.Object, SqlDbType.Variant),
             new DbTypeMapEntry(typeof(string), DbType.String, SqlDbType.VarChar)
         };
-
-        private TypeConverter()
-        { }
 
         #region Methods
 
@@ -115,9 +110,9 @@ namespace MdxClient
         private static DbTypeMapEntry Find(Type type)
         {
             object retObj = null;
-            for (int i = 0; i < _DbTypeList.Count; i++)
+            for (int i = 0; i < DbTypeList.Count; i++)
             {
-                DbTypeMapEntry entry = _DbTypeList[i];
+                DbTypeMapEntry entry = DbTypeList[i];
                 if (entry.Type == type)
                 {
                     retObj = entry;
@@ -134,9 +129,9 @@ namespace MdxClient
         private static DbTypeMapEntry Find(DbType dbType)
         {
             object retObj = null;
-            for (int i = 0; i < _DbTypeList.Count; i++)
+            for (int i = 0; i < DbTypeList.Count; i++)
             {
-                DbTypeMapEntry entry = (DbTypeMapEntry)_DbTypeList[i];
+                var entry = DbTypeList[i];
                 if (entry.DbType == dbType)
                 {
                     retObj = entry;
@@ -153,9 +148,9 @@ namespace MdxClient
         private static DbTypeMapEntry Find(SqlDbType sqlDbType)
         {
             object retObj = null;
-            for (int i = 0; i < _DbTypeList.Count; i++)
+            for (int i = 0; i < DbTypeList.Count; i++)
             {
-                DbTypeMapEntry entry = (DbTypeMapEntry)_DbTypeList[i];
+                var entry = DbTypeList[i];
                 if (entry.SqlDbType == sqlDbType)
                 {
                     retObj = entry;

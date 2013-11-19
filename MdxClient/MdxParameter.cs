@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
-using Microsoft.AnalysisServices.AdomdClient;
 using System.Data.Common;
 
 namespace MdxClient
@@ -18,7 +14,7 @@ namespace MdxClient
         /// </summary>
         public MdxParameter()
         {
-            DbType = System.Data.DbType.AnsiString;
+            DbType = DbType.AnsiString;
             Direction = ParameterDirection.Input;           
         }
 
@@ -62,7 +58,7 @@ namespace MdxClient
         /// </summary>
         public override void ResetDbType()
         {
-            DbType = System.Data.DbType.AnsiString;
+            DbType = DbType.AnsiString;
         }
 
         /// <summary>

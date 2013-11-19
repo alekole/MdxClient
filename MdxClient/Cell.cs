@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Runtime.Serialization;
 
 namespace MdxClient
 {
-    [Serializable()]
+    [Serializable]
     internal class Cell : ISerializable
     {
         public object FormattedValue { get; set; }
@@ -20,7 +17,7 @@ namespace MdxClient
 
         public Cell(SerializationInfo info, StreamingContext context)
         {
-            FormattedValue = (string)info.GetValue("FormattedValue", typeof(string));
+            FormattedValue = info.GetValue("FormattedValue", typeof(string));
             Value = info.GetValue("Value", typeof(object));
             Ordinal = (int)info.GetValue("Ordinal", typeof(int));
         }

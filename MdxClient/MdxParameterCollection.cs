@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Data;
 using System.Collections;
 using System.ComponentModel;
 using System.Globalization;
@@ -48,7 +44,7 @@ namespace MdxClient
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override int Add(object value)
         {
-            MdxParameterCollection.ValidateType(value);
+            ValidateType(value);
             Add((MdxParameter)value);
             return Count - 1;
         }
@@ -134,7 +130,8 @@ namespace MdxClient
         /// <param name="index">The index in the collection to copy the items.</param>
         public override void CopyTo(Array array, int index)
         {
-            _items.CopyTo(array, index);
+            if (array != null)
+                _items.CopyTo(array, index);
         }
 
         /// <summary>
@@ -224,7 +221,7 @@ namespace MdxClient
         /// <param name="value">The MdxParameter object to insert into the collection.</param>
         public override void Insert(int index, object value)
         {
-            MdxParameterCollection.ValidateType(value);
+            ValidateType(value);
             Insert(index, (MdxParameter)value);
         }
 
@@ -273,7 +270,7 @@ namespace MdxClient
         /// <param name="value">The MdxParameter object to remove.</param>
         public override void Remove(object value)
         {
-            MdxParameterCollection.ValidateType(value);
+            ValidateType(value);
             Remove((MdxParameter)value);
         }
 
@@ -300,14 +297,14 @@ namespace MdxClient
         protected override void SetParameter(string parameterName, DbParameter value)
         {
             int index = RangeCheck(parameterName);
-            MdxParameterCollection.ValidateType(value);
+            ValidateType(value);
             Replace(index, (MdxParameter)value);
         }
 
         protected override void SetParameter(int index, DbParameter value)
         {
-            MdxParameterCollection.ValidateType(value);
-            this[index] = (MdxParameter)value;
+            ValidateType(value);
+            this[index] = value;
         }
 
         /// <summary>
@@ -388,7 +385,7 @@ namespace MdxClient
 				}
 				if (-1 != num)
 				{
-					text = "Parameter" + Guid.NewGuid().ToString();
+					text = "Parameter" + Guid.NewGuid();
 				}
 				value.ParameterName = text;
 			}
@@ -400,7 +397,7 @@ namespace MdxClient
 			{
 				throw new ArgumentNullException("value");
 			}
-			if (!typeof(MdxParameter).IsInstanceOfType(value))
+			if (!(value is MdxParameter))
 			{
 				throw new ArgumentException("wrong type", "value");
 			}

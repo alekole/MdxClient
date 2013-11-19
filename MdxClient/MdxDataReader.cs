@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.AnalysisServices.AdomdClient;
 using System.Data;
 using System.Globalization;
 using System.Collections;
@@ -15,51 +12,51 @@ namespace MdxClient
         private bool _open = true;
         private int _currentRow = -1;
 
-        private ResultSet _resultSet;
-        private MdxConnection _connection = null;
-        private DataTable _schemaTable;
-        private static string[] _schemaTableColumnNames = new string[]
-		{
-			"ColumnName", 
-			"ColumnOrdinal", 
-			"ColumnSize", 
-			"NumericPrecision", 
-			"NumericScale", 
-			"DataType", 
-			"ProviderType", 
-			"IsLong", 
-			"AllowDBNull", 
-			"IsReadOnly", 
-			"IsRowVersion", 
-			"IsUnique", 
-			"IsKeyColumn", 
-			"IsAutoIncrement", 
-			"BaseSchemaName", 
-			"BaseCatalogName", 
-			"BaseTableName", 
-			"BaseColumnName"
-		};
-        private static Type[] _schemaTableColumnTypes = new Type[]
-		{
-			typeof(string), 
-			typeof(int), 
-			typeof(int), 
-			typeof(int), 
-			typeof(int), 
-			typeof(Type), 
-			typeof(object), 
-			typeof(bool), 
-			typeof(bool), 
-			typeof(bool), 
-			typeof(bool), 
-			typeof(bool), 
-			typeof(bool), 
-			typeof(bool), 
-			typeof(string), 
-			typeof(string), 
-			typeof(string), 
-			typeof(string)
-		};
+        private readonly ResultSet _resultSet;
+        private readonly MdxConnection _connection;
+        private readonly DataTable _schemaTable;
+        private static readonly string[] SchemaTableColumnNames =
+        {
+            "ColumnName", 
+            "ColumnOrdinal", 
+            "ColumnSize", 
+            "NumericPrecision", 
+            "NumericScale", 
+            "DataType", 
+            "ProviderType", 
+            "IsLong", 
+            "AllowDBNull", 
+            "IsReadOnly", 
+            "IsRowVersion", 
+            "IsUnique", 
+            "IsKeyColumn", 
+            "IsAutoIncrement", 
+            "BaseSchemaName", 
+            "BaseCatalogName", 
+            "BaseTableName", 
+            "BaseColumnName"
+        };
+        private static readonly Type[] SchemaTableColumnTypes =
+        {
+            typeof(string), 
+            typeof(int), 
+            typeof(int), 
+            typeof(int), 
+            typeof(int), 
+            typeof(Type), 
+            typeof(object), 
+            typeof(bool), 
+            typeof(bool), 
+            typeof(bool), 
+            typeof(bool), 
+            typeof(bool), 
+            typeof(bool), 
+            typeof(bool), 
+            typeof(string), 
+            typeof(string), 
+            typeof(string), 
+            typeof(string)
+        };
 
         internal MdxDataReader(ResultSet resultSet)
         {
@@ -248,7 +245,7 @@ namespace MdxClient
         /// <param name="name">The name of the column.</param>
         public override int GetOrdinal(string name)
         {
-            var column = _resultSet.Columns.Select((a, i) => new { Name = a.Name, Index = i }).SingleOrDefault(a => a.Name == name);
+            var column = _resultSet.Columns.Select((a, i) => new { a.Name, Index = i }).SingleOrDefault(a => a.Name == name);
             if (null != column)
             {
                 return column.Index;
@@ -343,10 +340,7 @@ namespace MdxClient
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
 
         public override int RecordsAffected
@@ -381,11 +375,10 @@ namespace MdxClient
 
         private DataTable CreateSchemaTable()
         {
-            DataTable dataTable = new DataTable();
-            dataTable.Locale = CultureInfo.InvariantCulture;
+            var dataTable = new DataTable {Locale = CultureInfo.InvariantCulture};
             for (int i = 0; i < 18; i++)
             {
-                dataTable.Columns.Add(MdxDataReader._schemaTableColumnNames[i], MdxDataReader._schemaTableColumnTypes[i]);
+                dataTable.Columns.Add(SchemaTableColumnNames[i], SchemaTableColumnTypes[i]);
             }
 
             foreach (Column column in _resultSet.Columns)
