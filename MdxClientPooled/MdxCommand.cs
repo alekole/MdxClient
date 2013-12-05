@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 using Microsoft.AnalysisServices.AdomdClient;
-using System.Data.Common;
-using System.Globalization;
 
-namespace MdxClient
+namespace MdxClientPooled
 {
     /// <summary>
     /// Represents an MDX statement to execute against a SQL Server Analysis Services database.

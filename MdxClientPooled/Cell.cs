@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace MdxClient
+namespace MdxClientPooled
 {
     [Serializable]
     internal class Cell : ISerializable

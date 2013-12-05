@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MdxClient
+namespace MdxClientPooled
 {
     internal class Member
     {

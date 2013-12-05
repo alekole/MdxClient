@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Data;
-using System.Diagnostics;
-using Dapper;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MdxClient;
 using System.Linq;
-using Test;
+using Dapper;
+using MdxClientPooled;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace DynamicTyped.Data.Test
 {

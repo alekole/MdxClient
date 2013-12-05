@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.ComponentModel;
-using System.Globalization;
 using System.Data.Common;
+using System.Globalization;
 
-namespace MdxClient
+namespace MdxClientPooled
 {
     public class MdxParameterCollection : DbParameterCollection
 	{

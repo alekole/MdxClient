@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 
-namespace MdxClient
+namespace MdxClientPooled
 {
     /// <summary>
     /// Реализация соединения с Olap с использованием пула

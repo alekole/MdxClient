@@ -1,11 +1,7 @@
 ﻿using System.Configuration;
-using System.Data.SqlClient;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using MdxClient;
+using MdxClientPooled;
 
-namespace Test
+namespace DynamicTyped.Data.Test
 {
     public static class UnitTestHelpers
     {

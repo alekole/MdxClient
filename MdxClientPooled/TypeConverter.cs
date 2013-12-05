@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace MdxClient
+namespace MdxClientPooled
 {
     /// <summary>
     /// Convert a base data type to another base data type

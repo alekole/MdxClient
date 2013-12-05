@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.Common;
 
-namespace MdxClient
+namespace MdxClientPooled
 {
     /// <summary>
     /// Represents a transaction to be performed on a SQL Server Analysis Services database.

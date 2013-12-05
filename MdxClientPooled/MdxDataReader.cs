@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Linq;
-using System.Data;
-using System.Globalization;
 using System.Collections;
+using System.Data;
 using System.Data.Common;
+using System.Globalization;
+using System.Linq;
 
-namespace MdxClient
+namespace MdxClientPooled
 {
     public class MdxDataReader : DbDataReader
     {
