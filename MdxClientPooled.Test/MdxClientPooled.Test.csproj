@@ -75,9 +75,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MdxClient\MdxClient.csproj">
+    <ProjectReference Include="..\MdxClientPooled\MdxClientPooled.csproj">
       <Project>{41bc5af2-c300-4d69-9bc9-27655522953a}</Project>
-      <Name>MdxClient</Name>
+      <Name>MdxClientPooled</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
