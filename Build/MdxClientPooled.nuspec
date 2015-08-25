@@ -12,5 +12,12 @@
     <releaseNotes>Initial public release</releaseNotes>
     <copyright>Copyright 2013</copyright>
     <tags>data, ado md, mdx, ssas, pool</tags>
+    <references>
+      <reference file="Microsoft.AnalysisServices.AdomdClient.dll" />
+	  <reference file="MdxClientPooled.dll" />
+    </references>
   </metadata>
+  <files>
+    <file src="bin\**" target="lib" />
+  </files>
 </package>
