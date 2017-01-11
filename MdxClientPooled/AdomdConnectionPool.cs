@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace MdxClientPooled
@@ -76,8 +77,11 @@ namespace MdxClientPooled
                 sender.Connection.Connection.Close(false);
                 lock (connections)
                 {
-                    // Reclaim the connection to the pool.
-                    connections.Add(sender.Connection.Connection.SessionID, sender.ExtraData);
+                    if (sender.Connection.Connection.State == ConnectionState.Closed && !sender.IsBroken)
+                    {
+                        // Reclaim the connection to the pool.
+                        connections.Add(sender.Connection.Connection.SessionID, sender.ExtraData);
+                    }
                 }
             }
             catch

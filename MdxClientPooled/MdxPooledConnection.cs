@@ -15,7 +15,13 @@ namespace MdxClientPooled
         }
 
         public MdxConnection Connection { get; private set; }
+
         public ArrayList ExtraData { get; private set; }
+
+        /// <summary>
+        /// Connection broken close and dispose it
+        /// </summary>
+        public bool IsBroken { get; set; }
         void IDisposable.Dispose()
         {
             if (Disposed != null)
