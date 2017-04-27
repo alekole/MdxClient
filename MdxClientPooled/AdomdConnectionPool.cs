@@ -36,19 +36,11 @@ namespace MdxClientPooled
             // A session exists
             var pooledConnection = new MdxConnection(connectionString);
             pooledConnection.Connection.SessionID = session.Key;
-            try
-            {
-                pooledConnection.Open();
-                // Register the session with the pool.
-                var poolItem = new MdxPooledConnection(pooledConnection, session.Value);
-                poolItem.Disposed += PoolItemDisposed;
-                return poolItem;
-            }
-            catch (Exception ex)
-            {
-                // Connection probably expired. Try again.
-                return GetConnectionFromPool(connectionString);
-            }
+            pooledConnection.Open();
+            // Register the session with the pool.
+            var poolItem = new MdxPooledConnection(pooledConnection, session.Value);
+            poolItem.Disposed += PoolItemDisposed;
+            return poolItem;
         }
         private static void ValidateListExistance(string connectionString)
         {
